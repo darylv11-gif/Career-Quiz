@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Career Personality Quiz</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #f9f9f9;
+      color: #333;
+    }
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    h1 {
+      text-align: center;
+      font-size: 1.8em;
+      margin-bottom: 20px;
+    }
+    .question {
+      margin-bottom: 20px;
+    }
+    .question p {
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 1em;
+    }
+    input[type="radio"] {
+      margin-right: 10px;
+      transform: scale(1.2);
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      font-size: 1.1em;
+      background-color: #0078D4;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #005fa3;
+    }
+    .result {
+      margin-top: 30px;
+      font-size: 1.2em;
+      text-align: center;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🌟 Career Personality Quiz</h1>
+    <form id="quizForm">
+      <div class="question">
+        <p>1. When faced with a problem, you:</p>
+        <label><input type="radio" name="q1" value="A"> Break it down logically</label>
+        <label><input type="radio" name="q1" value="B"> Brainstorm creative solutions</label>
+        <label><input type="radio" name="q1" value="C"> Collaborate with others</label>
+        <label><input type="radio" name="q1" value="D"> Trust your instincts</label>
+      </div>
+
+      <div class="question">
+        <p>2. You prefer tasks that are:</p>
+        <label><input type="radio" name="q2" value="A"> Structured and predictable</label>
+        <label><input type="radio" name="q2" value="B"> Open-ended and imaginative</label>
+        <label><input type="radio" name="q2" value="C"> Social and interactive</label>
+        <label><input type="radio" name="q2" value="D"> Fast-paced and dynamic</label>
+      </div>
+
+      <div class="question">
+        <p>3. Your ideal workspace is:</p>
+        <label><input type="radio" name="q3" value="A"> Quiet and private</label>
+        <label><input type="radio" name="q3" value="B"> Artistic and inspiring</label>
+        <label><input type="radio" name="q3" value="C"> Buzzing with people</label>
+        <label><input type="radio" name="q3" value="D"> Constantly changing</label>
+      </div>
+
+      <div class="question">
+        <p>4. You thrive when:</p>
+        <label><input type="radio" name="q4" value="A"> You have clear goals</label>
+        <label><input type="radio" name="q4" value="B"> You can express yourself</label>
+        <label><input type="radio" name="q4" value="C"> You’re part of a team</label>
+        <label><input type="radio" name="q4" value="D"> You’re solving real-world problems</label>
+      </div>
+
+      <div class="question">
+        <p>5. You’re most motivated by:</p>
+        <label><input type="radio" name="q5" value="A"> Mastery and expertise</label>
+        <label><input type="radio" name="q5" value="B"> Creativity and innovation</label>
+        <label><input type="radio" name="q5" value="C"> Connection and impact</label>
+        <label><input type="radio" name="q5" value="D"> Challenge and excitement</label>
+      </div>
+
+      <div class="question">
+        <p>6. You value:</p>
+        <label><input type="radio" name="q6" value="A"> Stability and precision</label>
+        <label><input type="radio" name="q6" value="B"> Expression and originality</label>
+        <label><input type="radio" name="q6" value="C"> Empathy and service</label>
+        <label><input type="radio" name="q6" value="D"> Risk and reward</label>
+      </div>
+
+      <button type="button" onclick="calculateResult()">Get My Career Match</button>
+    </form>
+
+    <div class="result" id="result"></div>
+  </div>
+
+  <script>
+    function calculateResult() {
+      const form = document.forms['quizForm'];
+      const answers = ['q1','q2','q3','q4','q5','q6'].map(q => form[q].value);
+      if (answers.includes("")) {
+        alert("Please answer all questions.");
+        return;
+      }
+
+      const counts = { A: 0, B: 0, C: 0, D: 0 };
+      answers.forEach(a => counts[a]++);
+
+      let resultText = "";
+      const max = Math.max(...Object.values(counts));
+      const top = Object.keys(counts).filter(k => counts[k] === max)[0];
+
+      switch (top) {
+        case 'A':
+          resultText = "🧠 You’re The Analyst! Careers: Data Scientist, Accountant, Engineer, Researcher.";
+          break;
+        case 'B':
+          resultText = "🎨 You’re The Creator! Careers: Designer, Writer, Architect, Marketing Specialist.";
+          break;
+        case 'C':
+          resultText = "🤝 You’re The Connector! Careers: Teacher, Therapist, HR Manager, Social Worker.";
+          break;
+        case 'D':
+          resultText = "🚀 You’re The Adventurer! Careers: Entrepreneur, Journalist, Consultant, EMT.";
+          break;
+      }
+
+      document.getElementById("result").innerText = resultText;
+    }
+  </script>
+</body>
+</html>
